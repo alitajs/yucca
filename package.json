@@ -1,0 +1,51 @@
+{
+  "name": "@yucca/core",
+  "version": "0.0.1",
+  "description": "page editor",
+  "main": "index.js",
+  "repository": "git@github.com:lotus-ui/yucca.git",
+  "author": "wangxingkang (wang_xingkang@qq.com)",
+  "license": "MIT",
+  "scripts": {
+    "bootstarp": "yarn || npm i",
+    "build": "gatsby build",
+    "prettier": "walrus prettier",
+    "start": "gatsby develop --port 8888 --open",
+    "lint": "walrus lint",
+    "lint:style": "walrus stylelint",
+    "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
+    "test": "walrus test"
+  },
+  "dependencies": {
+    "@alitajs/autils": "^0.6.0",
+    "antd": "^3.24.2",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.15",
+    "mobx": "^5.14.2",
+    "mobx-react": "^6.1.4",
+    "normalize.css": "^8.0.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-helmet": "^5.2.1",
+    "store": "^2.0.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@types/classnames": "^2.2.9",
+    "@types/lodash": "^4.14.144",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
+    "@types/react-helmet": "^5.0.13",
+    "@types/store": "^2.0.2",
+    "gatsby": "^2.17.4",
+    "gatsby-plugin-antd": "^2.0.2",
+    "gatsby-plugin-less": "^3.0.12",
+    "gatsby-plugin-manifest": "^2.2.23",
+    "gatsby-plugin-react-helmet": "^3.1.13",
+    "gatsby-plugin-typescript": "^2.1.15",
+    "gatsby-source-filesystem": "^2.1.33",
+    "less": "^3.10.3",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2"
+  }
+}

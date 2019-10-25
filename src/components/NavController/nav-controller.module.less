@@ -1,0 +1,117 @@
+@import "../../styles/themes/default";
+
+.editNav {
+  width: 100%;
+  top: 0;
+  z-index: 981;
+  height: 64px;
+  color: @edit-text-color;
+  line-height: 64px;
+  border-bottom: 1px solid @edit-line-color;
+}
+
+.logo {
+  width: 80px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: @primary-color;
+    border-radius: 4px;
+  }
+
+  img {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+
+.menu a,
+.historyButtonWrapper a,
+.newFileButton {
+  padding: 0 24px;
+  display: block;
+  color: #fff;
+  transition: color .3s, background .3s;
+
+  &[disabled] {
+    cursor: wait;
+  }
+
+  &:hover {
+    background: @edit-line-color;
+  }
+}
+
+.menu {
+  float: left;
+  border-left: 1px solid @edit-line-color;
+  margin: 0;
+
+  > li {
+    display: inline-block;
+    border-right: 1px solid @edit-line-color;
+
+    :global {
+      .anticon {
+        font-size: 16px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.newFileButton {
+  float: left;
+  cursor: pointer;
+  border-right: 1px solid @edit-line-color;
+
+  :global {
+    .anticon-file-add {
+      font-size: 16px !important;
+    }
+  }
+}
+
+.historyButtonWrapper {
+  height: 100%;
+  display: flex;
+  float: right;
+  font-size: 16px;
+
+  .undo {
+    border-left: 1px solid @edit-line-color;
+  }
+
+  .redo {
+    transform: scaleX(-1);
+    border-right: 1px solid @edit-line-color;
+  }
+
+  .undo,
+  .redo {
+    position: relative;
+
+    &.disabled {
+      a {
+        cursor: not-allowed;
+        color: #444;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .redo:after {
+    left: 0;
+    right: auto;
+  }
+}

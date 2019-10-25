@@ -1,0 +1,23 @@
+@import "../styles/themes/default";
+
+.editWrapper {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  background: @edit-bg-color;
+  overflow: hidden;
+
+  > div {
+    height: 100%;
+    float: left;
+  }
+}
+
+.editLeftView {
+  width: ~"calc(100% - 288px)";
+}
+
+.editRightView {
+  width: 288px;
+  border-left: 1px solid @edit-line-color;
+}
