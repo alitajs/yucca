@@ -2,11 +2,11 @@
 
 > 本项目主要参考[ant-design-landing](https://github.com/ant-design/ant-design-landing)，使用 `gatsby`、`typescript`进行重写。
 
-✨ 特性
+## ✨ 特性
 
 - 🚀 使用TypeScript编写
 
-⌨️ 本地开发
+## ⌨️ 本地开发
 
 ```
 # 克隆项目到本地
