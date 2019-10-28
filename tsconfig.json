@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "outDir": "./dist/",
     "sourceMap": true,
-    "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "target": "esnext",

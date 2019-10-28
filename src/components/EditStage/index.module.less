@@ -1,0 +1,34 @@
+@import "../../styles/themes/default";
+
+.editStage {
+  position: absolute;
+  width: 100%;
+  top: 16px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: ~"calc(100% - 16px)";
+  overflow-x: hidden;
+  overflow-y: scroll;
+  cursor: pointer;
+  transition: width .15s @ease-in-out, max-height .15s @ease-in-out, top .15s @ease-in-out;
+}
+
+.overlay {
+  overflow: hidden;
+
+  &-elem {
+    position: relative;
+
+    > div {
+      transition: opacity .3s @ease-out;
+    }
+
+    &:hover {
+      > div {
+        opacity: 1;
+      }
+    }
+  }
+}

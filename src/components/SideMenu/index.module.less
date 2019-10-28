@@ -1,0 +1,131 @@
+@import "../../styles/themes/default";
+
+.editSideMenu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid @edit-line-color;
+  text-align: center;
+  z-index: 100;
+  background: @edit-bg-color;
+  color: @edit-text-color;
+}
+
+.add {
+  padding: 16px 0;
+  border-bottom: 1px solid @edit-line-color;
+  cursor: pointer;
+  writing-mode: tb-rl;
+  letter-spacing: 4px;
+  line-height: 18px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  > i {
+    margin: 0 0 8px;
+  }
+}
+
+.other {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  > li {
+    padding: 10px 0;
+    border-top: 1px solid @edit-line-color;
+    cursor: pointer;
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      color: #fff;
+    }
+  }
+}
+
+.editSideMenuWrapper {
+  width: 40px;
+  height: 100%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  z-index: 999;
+
+  :global {
+    .drawer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+
+      &-bg {
+        display: none;
+      }
+
+      &-content-wrapper {
+        padding-left: 40px;
+        background: @edit-bg-color;
+        border-right: 1px solid @edit-line-color;
+        position: absolute;
+      }
+
+      &-content {
+        background: transparent;
+        padding: 40px 16px;
+      }
+    }
+  }
+}
+
+.editSideDrawer {
+  .title {
+    color: fade(@edit-text-color, 75);
+    margin-bottom: 8px;
+  }
+
+  .imgContentWrapper {
+    width: 320px;
+  }
+
+  :global {
+    .drawer-mask {
+      display: none;
+    }
+
+    .drawer-left.drawer-open .drawer-content-wrapper {
+      box-shadow: none;
+    }
+  }
+
+  .imgWrapper {
+    width: 50%;
+    display: inline-block;
+    padding: 0 8px;
+    margin-bottom: 16px;
+    vertical-align: top;
+
+    p {
+      font-size: 12px;
+      margin: 8px 0;
+      color: fade(@edit-text-color, 60);
+    }
+
+    .img {
+      height: 80px;
+      line-height: 76px;
+      background: #4a4a4a;
+      border: 1px solid #666;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
