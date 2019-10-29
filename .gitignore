@@ -1,4 +1,4 @@
-# Build
+# build output
 lib
 dist
 public
@@ -6,7 +6,7 @@ public
 # Test
 coverage
 
-# Dependency
+# Dependency directories
 node_modules
 
 # Log

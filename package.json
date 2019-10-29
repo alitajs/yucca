@@ -10,7 +10,7 @@
     "bootstarp": "yarn || npm i",
     "build": "umi build",
     "prettier": "walrus prettier",
-    "start": "cross-env PORT=8888 umi dev",
+    "start": "cross-env PORT=8000 umi dev",
     "lint": "walrus lint",
     "lint:style": "walrus stylelint",
     "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
