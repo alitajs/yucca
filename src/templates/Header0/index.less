@@ -1,0 +1,176 @@
+@import "../../styles/themes/custom";
+
+@prefix-cls: ~'header0';
+
+.@{prefix-cls} {
+  background: @template-nav-bg-color;
+  width: 100%;
+  z-index: 1;
+  box-shadow: 0 5px 8px fade(#000, 15);
+  position: relative;
+  top: 0;
+
+  .home-page {
+    padding: 0 24px;
+  }
+
+  &-logo {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    line-height: 64px;
+    & img {
+      vertical-align: middle;
+      display: inline-block;
+    }
+    & a {
+      display: block;
+    }
+  }
+
+  &-menu {
+    float: right;
+
+    >.ant-menu {
+      line-height: 62px;
+      background: transparent;
+      color: @template-text-color-light;
+      height: 64px;
+      border-bottom-color: transparent;
+      position: relative;
+
+      a {
+        color: inherit;
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .help {
+      border-left: 1px solid fade(@line-color, 5) !important;
+
+      .anticon {
+        font-size: 16px;
+        vertical-align: middle;
+      }
+
+      span {
+        display: inline-block;
+        font-size: 12px;
+      }
+    }
+
+    .user {
+      font-size: 14px;
+      border-left: 1px solid fade(@line-color, 5) !important;
+
+      .img {
+        margin-left: 0;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+
+        img {
+          vertical-align: middle;
+        }
+      }
+
+      span {
+        margin-left: 10px;
+      }
+    }
+  }
+  .ant-menu-item-selected a {
+    color: @primary-color;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .@{prefix-cls} {
+    &-logo {
+      z-index: 101;
+    }
+
+    &.home-page-wrapper .home-page {
+      padding: 0 24px;
+    }
+
+    & &-menu {
+      height: auto;
+      float: inherit;
+      position: relative;
+      left: -24px;
+      width: ~"calc(100% + 48px)";
+      opacity: 0;
+      transition: opacity .3s @ease-in-out, height .3s @ease-in-out;
+    }
+
+    &-mobile-menu {
+      width: 16px;
+      height: 14px;
+      cursor: pointer;
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 100;
+
+      em {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        margin-top: 4px;
+        transition: transform .3s @ease-in-out, opacity .3s @ease-in-out;
+      }
+
+      :first-child {
+        margin-top: 0;
+      }
+    }
+
+    .ant-menu {
+      height: auto;
+      overflow: hidden;
+      width: ~"calc(100% + 48px)";
+      background: @template-bg-color;
+      .ant-menu-item-selected {
+        border: none;
+      }
+      a {
+        color: @template-text-color-light;
+        &:hover {
+          color: @template-text-color-light;
+        }
+      }
+      .ant-menu-item-selected a {
+        color: @template-text-color-light;
+      }
+    }
+
+    & .open {
+      height: auto;
+
+      .@{prefix-cls}-mobile-menu {
+        em {
+          &:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+          }
+        }
+      }
+
+      > .@{prefix-cls}-menu {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+}
+
