@@ -9,6 +9,5 @@ export default {
   treeShaking: true,
   hash: true,
   theme: themeConfig,
-  ignoreMomentLocale: true,
-  outputPath: './public'
+  ignoreMomentLocale: true
 };
