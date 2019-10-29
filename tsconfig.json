@@ -1,21 +1,34 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./dist/",
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "commonjs",
-    "target": "esnext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "jsx": "react",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "target": "esnext",
     "lib": [
-      "dom",
-      "esnext"
+      "esnext",
+      "dom"
+    ],
+    "rootDirs": [
+      "/src",
+      "/test",
+      "/mock",
+      "./typings"
     ],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
   "include": [
-    "./src/**/*"
+    "./src"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

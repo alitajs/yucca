@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+import { SITE_METADATA } from '@/config';
 
 interface IProps {
   lang?: string;
@@ -11,21 +11,8 @@ interface IProps {
 
 const SEO: React.FC<IProps> = (props) => {
   const { description, lang, meta, title } = props;
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  );
 
-  const metaDescription = description || site.siteMetadata.description;
+  const metaDescription = description || SITE_METADATA.description;
 
   return (
     <Helmet
@@ -33,7 +20,7 @@ const SEO: React.FC<IProps> = (props) => {
         lang
       }}
       title={title}
-      titleTemplate={`%s · ${site.siteMetadata.title}`}
+      titleTemplate={`%s · ${SITE_METADATA.title}`}
       meta={[
         {
           name: `description`,
@@ -57,7 +44,7 @@ const SEO: React.FC<IProps> = (props) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: SITE_METADATA.author,
         },
         {
           name: `twitter:title`,

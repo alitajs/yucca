@@ -1,6 +1,6 @@
 <h1 align="center">yucca</h1>
 
-> 本项目主要参考[ant-design-landing](https://github.com/ant-design/ant-design-landing)，使用 `gatsby`、`typescript`进行重写。
+> 本项目主要参考[ant-design-landing](https://github.com/ant-design/ant-design-landing)，使用 `gatsby`、`Umi`、`typescript`进行重写。
 
 ## ✨ 特性
 
