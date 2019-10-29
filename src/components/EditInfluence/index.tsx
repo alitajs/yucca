@@ -26,14 +26,14 @@ const EditInfluence: React.FC<IEditInfluenceProps> = (props) => {
           <Option value="Desktop">
             <Icon type="laptop" style={{ fontSize: '12px' }} />
             <span style={{ marginLeft: 4 }}>
-                Desktop
-              </span>
+              Desktop
+            </span>
           </Option>
           <Option value="Mobile">
             <Icon type="mobile" style={{ fontSize: '12px' }} />
             <span style={{ marginLeft: 4 }}>
-                Mobile
-              </span>
+              Mobile
+            </span>
           </Option>
         </Select>
       </div>
