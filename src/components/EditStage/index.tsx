@@ -1,9 +1,29 @@
-import React, { useRef, useState } from 'react';
+import React, { FC, useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { MediaType } from '@/models/global';
+import { ConnectProps } from '@/models/connect';
+import {  } from '@/config/template';
 import styles from './index.module.less';
 
-const EditStage: React.FC = () => {
+interface Data {
+  [key: string]: {
+    comp: any;
+    dataId: string;
+  }
+}
+
+interface EditStageProps extends ConnectProps {
+  media: MediaType;
+}
+
+const EditStage: FC<EditStageProps> = (props) => {
+  const { media, dispatch } = props;
   const rootRef = useRef(null);
+  const [data, setData] = useState<Data>(null);
+
+  useEffect(() => {
+
+  }, []);
 
   const handleOverlayScroll = () => {
 
@@ -28,7 +48,9 @@ const EditStage: React.FC = () => {
   return (
     <div
       ref={rootRef}
-      className={classNames(styles.editStage)}
+      className={classNames(styles.editStage, {
+        [`${styles.mobile}`]: media === 'mobile'
+      })}
       onScroll={handleOverlayScroll}
       onMouseLeave={handleMouseLeave}
     >
@@ -40,7 +62,7 @@ const EditStage: React.FC = () => {
         className={styles.overlay}
         onDoubleClick={handleDoubleClick}
       >
-
+        123
       </div>
     </div>
   )

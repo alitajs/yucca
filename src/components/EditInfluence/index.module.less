@@ -1,7 +1,7 @@
 @import "../../styles/themes/default";
 
 .editInfluence {
-  height: 16px;
+  height: 30px;
   background: black;
 
   > div {
@@ -12,38 +12,17 @@
   }
 
   :global {
-    .ant-select {
-      line-height: 16px;
-      color: @edit-text-color;
-
-      &-selection {
-        background: transparent;
-        border: none;
-        border-radius: 0;
-
-        &:focus {
-          box-shadow: none;
-        }
-
-        &--single {
-          height: 16px;
-        }
-
-        &__rendered {
-          line-height: 16px;
-        }
-
-        &-selected-value {
-          padding-right: 16px;
-          span {
-            font-size: 12px;
-          }
-        }
-      }
-
-      &-arrow {
-        color: fade(@edit-text-color, 55);
-      }
+    .anticon {
+      color: @white;
+      font-size: 18px;
     }
+
+    .anticon + .anticon {
+      margin-left: 8px;
+    }
+  }
+
+  .active {
+    color: @primary-color;
   }
 }

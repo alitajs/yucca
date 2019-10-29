@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Tooltip, Popconfirm, Icon } from 'antd';
 import IconFont from '@/components/IconFont';
-import NewFileButton from './NewFileButton';
+import NewFileButton, { NewFileButtonProps } from './NewFileButton';
 import HistoryButton from './HistoryButton';
 import styles from './nav-controller.module.less';
 
-const NavController: React.FC = (props) => {
-  const {  } = props;
+export interface NavControllerProps extends NewFileButtonProps {
+
+}
+
+const NavController: FC<NavControllerProps> = (props) => {
+  const { location } = props;
   const [saveLoad, setSaveLoad] = useState<boolean>(false);
   const [publishLoad, setPublishLoad] = useState<boolean>(false);
   const [downloadLoad, setDownloadLoad] = useState<boolean>(false);
@@ -107,7 +111,7 @@ const NavController: React.FC = (props) => {
       <ul className={styles.menu}>
         {menuChild}
       </ul>
-      <NewFileButton />
+      <NewFileButton location={location} />
       <HistoryButton />
     </div>
   )

@@ -1,3 +1,3 @@
+import 'rc-drawer/assets/index.css';
 import './index.less';
-import './global.less';
 
