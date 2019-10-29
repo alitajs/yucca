@@ -1,10 +1,10 @@
-export interface ITemplateItem {
+export interface TemplateItem {
   name: string;
   order: number;
-  data: ITemplateDataItem[];
+  data: TemplateDataItem[];
 }
 
-export interface ITemplateDataItem {
+export interface TemplateDataItem {
   uid: number;
   src: string;
   text: string;
@@ -12,14 +12,14 @@ export interface ITemplateDataItem {
   disabled?: boolean;
 }
 
-export interface ITemplate {
-  [key: string]: ITemplateItem;
+export interface Template {
+  [key: string]: TemplateItem;
 }
 
 
-const template: ITemplate = {
+const template: Template = {
   Nav: {
-    name: 'Nav',
+    name: 'Header',
     order: 0,
     data: [
       {
@@ -28,9 +28,9 @@ const template: ITemplate = {
         uid: 0,
       },
       {
-        src: 'https://gw.alipayobjects.com/mdn/rms_ae7ad9/afts/img/A*luthRonCYuQAAAAAAAAAAABkARQnAQ',
-        text: '普通型(浅色)',
-        uid: 3,
+        src: 'https://zos.alipayobjects.com/rmsportal/UTHsfGMNXXbpEoL.jpg',
+        text: '带用户型',
+        uid: 1
       },
       {
         src: 'https://zos.alipayobjects.com/rmsportal/ZjfIAdkDVlpnilf.jpg',
@@ -38,11 +38,10 @@ const template: ITemplate = {
         uid: 2,
       },
       {
-        src: 'https://zos.alipayobjects.com/rmsportal/UTHsfGMNXXbpEoL.jpg',
-        text: '带用户型',
-        uid: 1,
-        disabled: true,
-      },
+        src: 'https://gw.alipayobjects.com/mdn/rms_ae7ad9/afts/img/A*luthRonCYuQAAAAAAAAAAABkARQnAQ',
+        text: '普通型(浅色)',
+        uid: 3,
+      }
     ]
   }
 };

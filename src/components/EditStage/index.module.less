@@ -3,20 +3,22 @@
 .editStage {
   position: absolute;
   width: 100%;
-  top: 16px;
+  top: 30px;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  height: ~"calc(100% - 16px)";
+  height: ~"calc(100% - 30px)";
   overflow-x: hidden;
   overflow-y: scroll;
   cursor: pointer;
   transition: width .15s @ease-in-out, max-height .15s @ease-in-out, top .15s @ease-in-out;
+  background: aqua;
 }
 
 .overlay {
   overflow: hidden;
+  color: @white;
 
   &-elem {
     position: relative;
@@ -31,4 +33,9 @@
       }
     }
   }
+}
+
+.mobile {
+  width: 375px;
+  max-height: 667px;
 }

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { connect } from 'dva';
+import EditStage from '@/components/EditStage';
 import NavController from '@/components/NavController';
 import EditInfluence from '@/components/EditInfluence';
 import SideMenu from '@/components/SideMenu';
@@ -11,7 +12,7 @@ interface BasicLayoutProps extends ConnectProps {
 }
 
 const BasicLayout: FC<BasicLayoutProps> = (props) => {
-  const { dispatch, global } = props;
+  const { dispatch, global, location } = props;
 
   const handleMediaChange = (type) => {
     dispatch({
@@ -31,6 +32,10 @@ const BasicLayout: FC<BasicLayoutProps> = (props) => {
             <EditInfluence
               media={global.media}
               onChange={handleMediaChange}
+            />
+            <EditStage
+              media={global.media}
+              {...props}
             />
           </div>
         </div>

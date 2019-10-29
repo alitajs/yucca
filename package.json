@@ -23,6 +23,8 @@
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "rc-drawer": "^3.0.2",
+    "rc-queue-anim": "^1.8.2",
+    "rc-tween-one": "^2.6.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
