@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { MediaType } from '@/models/global';
 import { ConnectProps } from '@/models/connect';
@@ -20,6 +20,10 @@ const EditStage: FC<EditStageProps> = (props) => {
   const { media, dispatch } = props;
   const rootRef = useRef(null);
   const [data, setData] = useState<Data>(null);
+
+  useEffect(() => {
+
+  }, []);
 
   const handleOverlayScroll = () => {
 

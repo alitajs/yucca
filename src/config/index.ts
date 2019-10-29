@@ -8,3 +8,20 @@ export const SITE_METADATA = {
   description: `page editor`,
   siteUrl: `https://yucca.lotus-ui.com`
 };
+
+// lean-cloud
+export const DEFAULT_FILE_NAME = 'Edit';
+export const DEFAULT_USER_AV_NAME = 'EditUser';
+
+/**
+ * 默认模板数据
+ */
+export const DEFAULT_TEMPLATE_DATA = {
+  template: [
+    'Header0_0'
+  ],
+  config: {},
+  style: [],
+  other: {},
+  page: {},
+};

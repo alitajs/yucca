@@ -24,7 +24,7 @@ const BasicLayout: FC<BasicLayoutProps> = (props) => {
   return (
     <div className={styles.editWrapper} key="2">
       <div className={styles.editLeftView}>
-        <NavController />
+        <NavController location={location} />
         <div className={styles.editContentWrapper}>
           <SideMenu />
           <div className={styles.editStageWrapper}>
