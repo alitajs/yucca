@@ -63,6 +63,13 @@ export function removeUserTemplate(userId, tid) {
 
 export const getHistory = () => store.get(LOCAL_STORAGE_HISTORY_KEY, []);
 
+/**
+ * 重置历史记录
+ */
+export const resetHistory = () => {
+  store.set(LOCAL_STORAGE_HISTORY_KEY, []);
+};
+
 export const removeHistoryAfter = (data) => {
   const history = getHistory();
 

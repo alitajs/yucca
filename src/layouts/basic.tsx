@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'dva';
 import EditStage from '@/components/EditStage';
 import NavController from '@/components/NavController';
@@ -12,7 +12,11 @@ interface BasicLayoutProps extends ConnectProps {
 }
 
 const BasicLayout: FC<BasicLayoutProps> = (props) => {
-  const { dispatch, global, location, children, match } = props;
+  const { dispatch, global, children, match } = props;
+
+  useEffect(() => {
+
+  }, []);
 
   const handleMediaChange = (type) => {
     dispatch({

@@ -10,7 +10,6 @@ export interface NavControllerProps extends NewFileButtonProps {
 }
 
 const NavController: FC<NavControllerProps> = (props) => {
-  const { location } = props;
   const [saveLoad, setSaveLoad] = useState<boolean>(false);
   const [publishLoad, setPublishLoad] = useState<boolean>(false);
   const [downloadLoad, setDownloadLoad] = useState<boolean>(false);
@@ -111,7 +110,7 @@ const NavController: FC<NavControllerProps> = (props) => {
       <ul className={styles.menu}>
         {menuChild}
       </ul>
-      <NewFileButton location={location} />
+      <NewFileButton />
       <HistoryButton />
     </div>
   )

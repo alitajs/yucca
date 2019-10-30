@@ -1,3 +1,5 @@
+import * as r from 'ramda';
+import { DEFAULT_USER_NAME } from '@/config';
 import {
   saveTemplate,
   pushToHistory,
@@ -20,6 +22,13 @@ export function updateHistory(template) {
 
     saveCurrentData(template);
   }
+}
+
+export function getCurrentTemplateId(hash, data) {
+  if (hash) return hash;
+  if (data) return undefined;
+
+  return r.compose(r.last, getUserTemplateIds)(DEFAULT_USER_NAME);
 }
 
 export function saveTemplateToLocalStorage(uid, template) {
