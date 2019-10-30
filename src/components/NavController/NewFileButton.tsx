@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Location } from 'history';
 import { Menu, Button, Icon, Dropdown, message } from 'antd';
+import { router } from 'umi';
+import IconFont from '@/components/IconFont';
 import AV from '@/utils/leanCloud';
 import { getUserTemplateIds } from '@/utils/storage';
 import { saveTemplateToLocalStorage } from '@/utils/utils';
@@ -14,22 +15,27 @@ import styles from './nav-controller.module.less';
 const { Item, ItemGroup } = Menu;
 
 export interface NewFileButtonProps {
-  location?: Location;
+  currentTemplateId?: string
 }
 
 const NewFileButton: FC<NewFileButtonProps> = (props) => {
-  const { children, location } = props;
+  const { children, currentTemplateId } = props;
   const [templateIds, setTemplateIds] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   useEffect(() => {
-    const query = location['query'];
-    if (query && query.uid) {
-      setSelectedKeys([query.uid])
-    }
     setTemplateIds(getUserTemplateIds(DEFAULT_USER_NAME));
-  }, [location]);
+  }, []);
 
+  useEffect(() => {
+    if (currentTemplateId) {
+      setSelectedKeys([currentTemplateId])
+    } else {
+      setSelectedKeys([])
+    }
+  }, [props.currentTemplateId]);
+
+  // 创建一个新的模板
   const handleNew = async () => {
     const ProjectObject = AV.Object.extend(DEFAULT_FILE_NAME);
 
@@ -48,6 +54,14 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
     } catch (error) {}
   };
 
+  /**
+   * 切换模板
+   * @param e
+   */
+  const handleClickItem = (e) => {
+    e.key && router.push(e.key);
+  };
+
   const getNewMenu = () => {
     const localChild = templateIds.map((key) => (
       <Item
@@ -64,13 +78,35 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
         >
           {key}
         </span>
+        <span className="bar-list-remove">
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              this.onSyncData(key);
+            }}
+            size="small"
+            shape="circle"
+            style={{ margin: '0 8px' }}
+          >
+            <IconFont type="icon-brush" />
+          </Button>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              this.onRemoveUserTemplate(key);
+            }}
+            size="small"
+            shape="circle"
+            icon="delete"
+          />
+        </span>
       </Item>
     ));
 
     return localChild.length && (
       <Menu
         style={{ width: 300, textAlign: 'center' }}
-        onClick={this.onClickItem}
+        onClick={handleClickItem}
         selectedKeys={selectedKeys}
       >
         <ItemGroup title="近期所建" key="0">
