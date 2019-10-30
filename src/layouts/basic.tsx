@@ -12,7 +12,7 @@ interface BasicLayoutProps extends ConnectProps {
 }
 
 const BasicLayout: FC<BasicLayoutProps> = (props) => {
-  const { dispatch, global, location } = props;
+  const { dispatch, global, location, children, match } = props;
 
   const handleMediaChange = (type) => {
     dispatch({
@@ -24,7 +24,9 @@ const BasicLayout: FC<BasicLayoutProps> = (props) => {
   return (
     <div className={styles.editWrapper} key="2">
       <div className={styles.editLeftView}>
-        <NavController location={location} />
+        <NavController
+          currentTemplateId={match.params['templateId'] ? match.params['templateId'] : ''}
+        />
         <div className={styles.editContentWrapper}>
           <SideMenu />
           <div className={styles.editStageWrapper}>
@@ -43,6 +45,7 @@ const BasicLayout: FC<BasicLayoutProps> = (props) => {
       <div className={styles.editRightView}>
 
       </div>
+      {children}
     </div>
   )
 };
