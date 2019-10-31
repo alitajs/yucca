@@ -4,6 +4,7 @@ import {
   LOCAL_STORAGE_HISTORY_KEY,
   LOCAL_STORAGE_CURRENT_DATA_KEY
 } from '@/config';
+import {isString} from "@alitajs/autils";
 
 /**
  * 获取指定ID的模板数据
@@ -35,7 +36,11 @@ export function removeTemplate(tid) {
  */
 export function getUserTemplateIds(userId) {
   const value = store.get(userId, []);
-  return typeof value === 'string' ? value.split(',').filter(c => c) : value;
+  if (isString(value)) {
+    return value.split(',').filter(c => c);
+  } else {
+    return value;
+  }
 }
 
 /**

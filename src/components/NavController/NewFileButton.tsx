@@ -1,15 +1,14 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Menu, Button, Icon, Dropdown, message } from 'antd';
+import { Menu, Button, Icon, Dropdown } from 'antd';
 import { router } from 'umi';
 import IconFont from '@/components/IconFont';
-import AV from '@/utils/leanCloud';
-import { getUserTemplateIds } from '@/utils/storage';
-import { saveTemplateToLocalStorage } from '@/utils/utils';
 import {
-  DEFAULT_USER_NAME,
-  DEFAULT_TEMPLATE_DATA,
-  DEFAULT_FILE_NAME
-} from '@/config';
+  removeUserTemplate,
+  getUserTemplateIds,
+  removeTemplate
+} from '@/utils/localStorage';
+import { DEFAULT_USER_NAME } from '@/config';
+import { newTemplate, removeCloudTemplate } from '@/utils/utils';
 import styles from './nav-controller.module.less';
 
 const { Item, ItemGroup } = Menu;
@@ -36,22 +35,44 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
   }, [props.currentTemplateId]);
 
   // 创建一个新的模板
-  const handleNew = async () => {
-    const ProjectObject = AV.Object.extend(DEFAULT_FILE_NAME);
+  const handleClickNew = () => {
+    newTemplate(DEFAULT_USER_NAME)
+      .then((data) => {
+        router.push(`/${data['id']}`);
+        // 重新获取用户模板集合
+        const templateIds = getUserTemplateIds(DEFAULT_USER_NAME);
+        setTemplateIds(templateIds);
+      }).catch((error) => {
+        console.error(error);
+      });
+  };
 
-    const templateRecord = new ProjectObject();
+  /**
+   * 删除模板
+   * @param key 模板ID
+   */
+  const handleRemoveTemplate =  (key: string) => {
+    if (!key) return;
+    // 删除模板ID
+    removeUserTemplate(DEFAULT_USER_NAME, key);
 
-    templateRecord.set('template', DEFAULT_TEMPLATE_DATA.template);
-    templateRecord.set('config', DEFAULT_TEMPLATE_DATA.config);
-    templateRecord.set('style', DEFAULT_TEMPLATE_DATA.style);
-    templateRecord.set('other', DEFAULT_TEMPLATE_DATA.other);
-    templateRecord.set('page', DEFAULT_TEMPLATE_DATA.page);
+    // 重新获取用户模板集合
+    const templateIds = getUserTemplateIds(DEFAULT_USER_NAME);
+    setTemplateIds(templateIds);
 
-    try {
-      const template = await templateRecord.save();
+    // 删除模板数据
+    removeTemplate(key);
 
-      saveTemplateToLocalStorage(DEFAULT_USER_NAME, template);
-    } catch (error) {}
+    // 删除云数据
+    removeCloudTemplate(key)
+      .then(() => {
+        console.log('remove success');
+      });
+
+    // 删除的是当前模板
+    if (currentTemplateId === key) {
+      handleClickItem({ key: templateIds[0] })
+    }
   };
 
   /**
@@ -59,7 +80,9 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
    * @param e
    */
   const handleClickItem = (e) => {
-    e.key && router.push(e.key);
+    if (!e) return;
+    const tId = e.key;
+    tId && router.push(tId);
   };
 
   const getNewMenu = () => {
@@ -93,7 +116,7 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
           <Button
             onClick={(e) => {
               e.stopPropagation();
-              this.onRemoveUserTemplate(key);
+              handleRemoveTemplate(key);
             }}
             size="small"
             shape="circle"
@@ -119,7 +142,7 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
   const newIcon = (
     <a
       className={styles.newFileButton}
-      onClick={handleNew}
+      onClick={handleClickNew}
     >
       {children || <Icon type="file-add" />}
     </a>
