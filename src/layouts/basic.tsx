@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'dva';
 import EditStage from '@/components/EditStage';
 import NavController from '@/components/NavController';
@@ -13,10 +13,15 @@ interface BasicLayoutProps extends ConnectProps {
 
 const BasicLayout: FC<BasicLayoutProps> = (props) => {
   const { dispatch, global, children, match } = props;
+  const [currentTemplateId, setCurrentTemplateId] = useState<string>('');
 
   useEffect(() => {
-
-  }, []);
+    if (match.params['templateId']) {
+      setCurrentTemplateId(match.params['templateId'])
+    } else {
+      setCurrentTemplateId('');
+    }
+  }, [props.location]);
 
   const handleMediaChange = (type) => {
     dispatch({
@@ -29,7 +34,7 @@ const BasicLayout: FC<BasicLayoutProps> = (props) => {
     <div className={styles.editWrapper} key="2">
       <div className={styles.editLeftView}>
         <NavController
-          currentTemplateId={match.params['templateId'] ? match.params['templateId'] : ''}
+          currentTemplateId={currentTemplateId}
         />
         <div className={styles.editContentWrapper}>
           <SideMenu />

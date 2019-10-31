@@ -110,7 +110,7 @@ const NavController: FC<NavControllerProps> = (props) => {
       <ul className={styles.menu}>
         {menuChild}
       </ul>
-      <NewFileButton />
+      <NewFileButton currentTemplateId={props.currentTemplateId} />
       <HistoryButton />
     </div>
   )

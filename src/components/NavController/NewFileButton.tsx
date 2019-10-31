@@ -1,15 +1,10 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Menu, Button, Icon, Dropdown, message } from 'antd';
+import { Menu, Button, Icon, Dropdown } from 'antd';
 import { router } from 'umi';
 import IconFont from '@/components/IconFont';
-import AV from '@/utils/leanCloud';
 import { getUserTemplateIds } from '@/utils/storage';
-import { saveTemplateToLocalStorage } from '@/utils/utils';
-import {
-  DEFAULT_USER_NAME,
-  DEFAULT_TEMPLATE_DATA,
-  DEFAULT_FILE_NAME
-} from '@/config';
+import { DEFAULT_USER_NAME } from '@/config';
+import { newTemplate } from '@/utils/utils';
 import styles from './nav-controller.module.less';
 
 const { Item, ItemGroup } = Menu;
@@ -36,22 +31,13 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
   }, [props.currentTemplateId]);
 
   // 创建一个新的模板
-  const handleNew = async () => {
-    const ProjectObject = AV.Object.extend(DEFAULT_FILE_NAME);
-
-    const templateRecord = new ProjectObject();
-
-    templateRecord.set('template', DEFAULT_TEMPLATE_DATA.template);
-    templateRecord.set('config', DEFAULT_TEMPLATE_DATA.config);
-    templateRecord.set('style', DEFAULT_TEMPLATE_DATA.style);
-    templateRecord.set('other', DEFAULT_TEMPLATE_DATA.other);
-    templateRecord.set('page', DEFAULT_TEMPLATE_DATA.page);
-
-    try {
-      const template = await templateRecord.save();
-
-      saveTemplateToLocalStorage(DEFAULT_USER_NAME, template);
-    } catch (error) {}
+  const handleClickNew = () => {
+    newTemplate(DEFAULT_USER_NAME)
+      .then((data) => {
+        router.push(`/${data['id']}`);
+      }).catch((error) => {
+        console.error(error);
+      });
   };
 
   /**
@@ -119,7 +105,7 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
   const newIcon = (
     <a
       className={styles.newFileButton}
-      onClick={handleNew}
+      onClick={handleClickNew}
     >
       {children || <Icon type="file-add" />}
     </a>
