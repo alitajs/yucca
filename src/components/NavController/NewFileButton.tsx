@@ -2,9 +2,13 @@ import React, { FC, useState, useEffect } from 'react';
 import { Menu, Button, Icon, Dropdown } from 'antd';
 import { router } from 'umi';
 import IconFont from '@/components/IconFont';
-import { getUserTemplateIds } from '@/utils/storage';
+import {
+  removeUserTemplate,
+  getUserTemplateIds,
+  removeTemplate
+} from '@/utils/localStorage';
 import { DEFAULT_USER_NAME } from '@/config';
-import { newTemplate } from '@/utils/utils';
+import { newTemplate, removeCloudTemplate } from '@/utils/utils';
 import styles from './nav-controller.module.less';
 
 const { Item, ItemGroup } = Menu;
@@ -35,9 +39,40 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
     newTemplate(DEFAULT_USER_NAME)
       .then((data) => {
         router.push(`/${data['id']}`);
+        // 重新获取用户模板集合
+        const templateIds = getUserTemplateIds(DEFAULT_USER_NAME);
+        setTemplateIds(templateIds);
       }).catch((error) => {
         console.error(error);
       });
+  };
+
+  /**
+   * 删除模板
+   * @param key 模板ID
+   */
+  const handleRemoveTemplate =  (key: string) => {
+    if (!key) return;
+    // 删除模板ID
+    removeUserTemplate(DEFAULT_USER_NAME, key);
+
+    // 重新获取用户模板集合
+    const templateIds = getUserTemplateIds(DEFAULT_USER_NAME);
+    setTemplateIds(templateIds);
+
+    // 删除模板数据
+    removeTemplate(key);
+
+    // 删除云数据
+    removeCloudTemplate(key)
+      .then(() => {
+        console.log('remove success');
+      });
+
+    // 删除的是当前模板
+    if (currentTemplateId === key) {
+      handleClickItem({ key: templateIds[0] })
+    }
   };
 
   /**
@@ -45,7 +80,9 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
    * @param e
    */
   const handleClickItem = (e) => {
-    e.key && router.push(e.key);
+    if (!e) return;
+    const tId = e.key;
+    tId && router.push(tId);
   };
 
   const getNewMenu = () => {
@@ -79,7 +116,7 @@ const NewFileButton: FC<NewFileButtonProps> = (props) => {
           <Button
             onClick={(e) => {
               e.stopPropagation();
-              this.onRemoveUserTemplate(key);
+              handleRemoveTemplate(key);
             }}
             size="small"
             shape="circle"

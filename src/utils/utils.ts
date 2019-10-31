@@ -1,5 +1,10 @@
 import * as r from 'ramda';
-import {DEFAULT_USER_NAME, DEFAULT_TEMPLATE_DATA, DEFAULT_FILE_NAME} from '@/config';
+import {
+  DEFAULT_USER_NAME,
+  DEFAULT_TEMPLATE_DATA,
+  DEFAULT_FILE_NAME
+} from '@/config';
+import AV from '@/utils/leanCloud';
 import {
   saveTemplate,
   pushToHistory,
@@ -9,7 +14,6 @@ import {
   removeHistoryAfter,
   unShiftToUserTemplateIds
 } from './localStorage';
-import AV from "@/utils/leanCloud";
 
 export function updateHistory(template) {
   const { noHistory } = template;
@@ -69,6 +73,27 @@ export function newTemplate(uid, data = DEFAULT_TEMPLATE_DATA) {
       saveTemplateToLocalStorage(DEFAULT_USER_NAME, template);
 
       resolve(template);
+    } catch (error) {
+      reject(error);
+    }
+  })
+}
+
+/**
+ * 从云端删除数据
+ * @param tId
+ */
+export function removeCloudTemplate(tId) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const todo = AV.Object.createWithoutData(DEFAULT_FILE_NAME, tId);
+      todo.destroy()
+        .then(() => {
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
     } catch (error) {
       reject(error);
     }
