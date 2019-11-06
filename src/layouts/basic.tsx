@@ -4,11 +4,11 @@ import EditStage from '@/components/EditStage';
 import NavController from '@/components/NavController';
 import EditInfluence from '@/components/EditInfluence';
 import SideMenu from '@/components/SideMenu';
-import { ConnectProps, ConnectState, GlobalModelState } from '@/models/connect';
+import { RouterProps, GlobalStore } from '@/common/types';
 import styles from './basic.module.less';
 
-interface BasicLayoutProps extends ConnectProps {
-  global: GlobalModelState
+interface BasicLayoutProps extends RouterProps {
+  global: GlobalStore
 }
 
 const BasicLayout: FC<BasicLayoutProps> = (props) => {
@@ -61,6 +61,6 @@ const BasicLayout: FC<BasicLayoutProps> = (props) => {
 
 export default connect(({
   global
-}: ConnectState) => ({
+}: any) => ({
   global
 }))(BasicLayout);
